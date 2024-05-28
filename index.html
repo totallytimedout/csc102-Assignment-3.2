@@ -1,0 +1,154 @@
+<!-- <!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Webpage</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+        // function to update the display of the inputted data live
+        function updateDisplay() {
+            var firstName = document.getElementById("firstName").value;
+            var lastName = document.getElementById("lastName").value;
+            var MI = document.getElementById("middleInitial").value;
+            let fullName =
+                firstName && lastName && MI
+                    ? `${lastName}, ${MI}. ${firstName}`
+                    : firstName && lastName && !MI
+                    ? `${lastName}, ${firstName}`
+                    : "";
+            document.getElementById("fullNameDisplay").innerHTML = fullName;
+            validate();
+        }
+    
+        // this function will validate the login credentials
+        function validate() {
+            Array.from(document.getElementsByTagName('input')).forEach((child) => {
+                var isValid;
+                if (child.className == "live-display") {
+                    isValid = typeof child.value === "string" ? true : false;
+                } else if(child==document.getElementById('zipCode')){
+                    isValid =
+                        typeof child.value === "number"
+                            ? child.value.toString().length > 5
+                                ? false
+                                : true
+                            : false;
+                }else{ isValid=false;}
+            });
+        }
+    </script>
+  </head>
+
+  <body>
+    <form>
+      <label for="firstName">First Name:</label>
+      <input
+        class="live-display"
+        type="text"
+        id="firstName"
+        name="firstName"
+        required
+      /><br /><br />
+
+      <label for="middleInitial">Middle Initial:</label>
+      <input
+        class="live-display"
+        type="text"
+        id="middleInitial"
+        name="middleInitial"
+        maxlength="1"
+       
+      /><br /><br />
+
+      <label for="lastName">Last Name:</label>
+      <input
+        class="live-display"
+        type="text"
+        id="lastName"
+        name="lastName"
+        
+        required
+      /><br /><br />
+
+      <label for="zipCode">Zip Code:</label>
+    <input type="number" id="zipCode" name="zipCode" maxlength="5" minlength="5" required inputmode="numeric" /><br /><br />
+
+      <button type="button" onclick="updateDisplay()">Login</button>
+    </form>
+
+    <div>
+      <h3 id="fullNameDisplay">
+
+      </h3>
+    </div>
+  </body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 3.2 User Input Validation</title>
+    <link rel="stylesheet" href="styles.css" />
+
+</head>
+
+<body>
+    <form id="login" name="login"></form>
+    <label for="firstName">First:</label>
+    <input type="text" id="firstName" placeholder="John" />
+    <label for="middleInitial">MI:</label>
+    <input type="text" id="middleInitial" placeholder="D" maxlength="1" />
+    <label for="lastName">Last:</label>
+    <input type="text" id="lastName" placeholder="Doe" />
+    <input id="submit" type="submit" value="submit" aria-label="submit" />
+    </form>
+    <p id="fullNameDisplay"></p>
+    <script>
+        var inputElement = document.createElement('input');
+        document.getElementById("submit").addEventListener('click', (e) => { e.preventDefault(); validate(); })
+        function update(x, y) {
+            if (x && y) {
+                document.body.innerHTML = "successful transmission of secret message ..... 'hi'";
+            }
+        }
+        function validate() {
+            
+            var nameIsValid;
+            var isZipValid;
+            inputElement.id = "zipCode";
+            
+            const first = document.getElementById("firstName").value;
+            const middle = document.getElementById("middleInitial").value;
+            const last = document.getElementById("lastName").value;
+            const fullName = middleInitial ? `${last}, ${middle}. ${first}` : `${last}, ${first}`;
+            document.getElementById("fullNameDisplay").innerHTML = fullName;
+            if (fullName.length > 20) {
+                fullNameDisplay.classList = 'warning';
+                nameIsValid = false;
+            } else { fullNameDisplay.classList = 'nominal'; nameIsValid = true; }
+            
+            if (nameIsValid) {
+                
+                document.body.prepend(inputElement);
+                document.body.insertBefore(inputElement, fullNameDisplay);
+                inputElement.setAttribute('minLength', 5);
+            inputElement.setAttribute('maxlength', 5);
+            inputElement.setAttribute('type', 'text');
+            inputElement.setAttribute('placeholder', '5-digit zip');
+            inputElement.setAttribute('onchange', 'if(this.value.length === 5){isZipValid=true}else{isZipValid=false}; update(true,isZipValid)')
+        }
+
+        };
+    
+
+    </script>
+</body>
+
+</html>

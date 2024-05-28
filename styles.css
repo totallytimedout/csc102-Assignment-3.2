@@ -1,0 +1,25 @@
+body{
+    display:block;
+    position: initial;
+    background-color: #99e0aa;
+ 
+}
+
+*{
+    
+color: saddlebrown;
+}
+
+.warning{
+    color:orange !important;
+    border: orange 2px solid;
+    background-color: #464646;
+}
+.nominal{
+    color:green !important;
+    border: greenyellow 2px solid;
+    background-color: #464646;
+}
+
+
+
