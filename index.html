@@ -1,143 +1,66 @@
-<!-- <!DOCTYPE html>
-
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Webpage</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script>
-        // function to update the display of the inputted data live
-        function updateDisplay() {
-            var firstName = document.getElementById("firstName").value;
-            var lastName = document.getElementById("lastName").value;
-            var MI = document.getElementById("middleInitial").value;
-            let fullName =
-                firstName && lastName && MI
-                    ? `${lastName}, ${MI}. ${firstName}`
-                    : firstName && lastName && !MI
-                    ? `${lastName}, ${firstName}`
-                    : "";
-            document.getElementById("fullNameDisplay").innerHTML = fullName;
-            validate();
-        }
-    
-        // this function will validate the login credentials
-        function validate() {
-            Array.from(document.getElementsByTagName('input')).forEach((child) => {
-                var isValid;
-                if (child.className == "live-display") {
-                    isValid = typeof child.value === "string" ? true : false;
-                } else if(child==document.getElementById('zipCode')){
-                    isValid =
-                        typeof child.value === "number"
-                            ? child.value.toString().length > 5
-                                ? false
-                                : true
-                            : false;
-                }else{ isValid=false;}
-            });
-        }
-    </script>
-  </head>
-
-  <body>
-    <form>
-      <label for="firstName">First Name:</label>
-      <input
-        class="live-display"
-        type="text"
-        id="firstName"
-        name="firstName"
-        required
-      /><br /><br />
-
-      <label for="middleInitial">Middle Initial:</label>
-      <input
-        class="live-display"
-        type="text"
-        id="middleInitial"
-        name="middleInitial"
-        maxlength="1"
-       
-      /><br /><br />
-
-      <label for="lastName">Last Name:</label>
-      <input
-        class="live-display"
-        type="text"
-        id="lastName"
-        name="lastName"
-        
-        required
-      /><br /><br />
-
-      <label for="zipCode">Zip Code:</label>
-    <input type="number" id="zipCode" name="zipCode" maxlength="5" minlength="5" required inputmode="numeric" /><br /><br />
-
-      <button type="button" onclick="updateDisplay()">Login</button>
-    </form>
-
-    <div>
-      <h3 id="fullNameDisplay">
-
-      </h3>
-    </div>
-  </body>
-</html> -->
-
-
-
-<!DOCTYPE html>
-<html lang="en">
+<!-- Assignment 3.2 -- Caleb Hess -- CSC102 -->
+<!-- //doctype tells the browser this is an html document -->
+<!DOCTYPE html> 
+<!--   //set the language to english -->
+<html lang="en"> 
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Assignment 3.2 User Input Validation</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css" /> //link the stylesheet
 
 </head>
 
 <body>
-    <form id="login" name="login"></form>
+<!--   //here is the form for logging in -->
+    <form id="login" name="login">
+<!--       // first name input  -->
     <label for="firstName">First:</label>
-    <input type="text" id="firstName" placeholder="John" />
+    <input type="text" id="firstName" placeholder="John" required/>
+<!--       // optional middle initial -->
     <label for="middleInitial">MI:</label>
     <input type="text" id="middleInitial" placeholder="D" maxlength="1" />
     <label for="lastName">Last:</label>
-    <input type="text" id="lastName" placeholder="Doe" />
+    <input type="text" id="lastName" placeholder="Doe" required/>
     <input id="submit" type="submit" value="submit" aria-label="submit" />
     </form>
+<!--   show the total input as a string -->
     <p id="fullNameDisplay"></p>
     <script>
+      //establish the input element to be inserted for after the name check
         var inputElement = document.createElement('input');
+      //add the event action to the submit button
         document.getElementById("submit").addEventListener('click', (e) => { e.preventDefault(); validate(); })
+      // this function shows the secret message
+      // x and y are the two boolean values for if the name passed and the zip passed check
         function update(x, y) {
             if (x && y) {
                 document.body.innerHTML = "successful transmission of secret message ..... 'hi'";
             }
         }
+      // this function checks for validity
         function validate() {
             
-            var nameIsValid;
-            var isZipValid;
-            inputElement.id = "zipCode";
-            
-            const first = document.getElementById("firstName").value;
+            var nameIsValid; //name check flag
+            var isZipValid; //name check flag
+            inputElement.id = "zipCode"; //update the input element
+            //establish conmstants from inputs
+            const first = document.getElementById("firstName").value; 
             const middle = document.getElementById("middleInitial").value;
             const last = document.getElementById("lastName").value;
             const fullName = middleInitial ? `${last}, ${middle}. ${first}` : `${last}, ${first}`;
-            document.getElementById("fullNameDisplay").innerHTML = fullName;
+            document.getElementById("fullNameDisplay").innerHTML = fullName; //update display
             if (fullName.length > 20) {
-                fullNameDisplay.classList = 'warning';
-                nameIsValid = false;
-            } else { fullNameDisplay.classList = 'nominal'; nameIsValid = true; }
+                fullNameDisplay.classList = 'warning'; //makes it apparent that its warning
+                nameIsValid = false; //sets flag
+            } else { fullNameDisplay.classList = 'nominal'; nameIsValid = true; } //shows good and sets flag
             
             if (nameIsValid) {
-                
+                //add the zipcode input box upon pass of name check 
                 document.body.prepend(inputElement);
                 document.body.insertBefore(inputElement, fullNameDisplay);
+              //edstablish attributes for the input
                 inputElement.setAttribute('minLength', 5);
             inputElement.setAttribute('maxlength', 5);
             inputElement.setAttribute('type', 'text');
@@ -150,5 +73,5 @@
 
     </script>
 </body>
-
+<!-- end html -->
 </html>
